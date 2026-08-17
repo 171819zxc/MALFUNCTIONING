@@ -14,7 +14,7 @@ namespace MALFUNCTIONING
 {
     internal class execute
     {
-        public static int payloadsCount = 10;    // 这里修改GDI数量
+        public static int payloadsCount = 11;    // 这里修改GDI数量
         public static List<int> remainPayloads = new List<int>();
         public static int Sound = 0;
         public static void Run()
@@ -75,6 +75,9 @@ namespace MALFUNCTIONING
                 case 9:
                     NewThread(GDI10);
                     break;
+                case 10:
+                    NewThread(GDI11);
+                    break;
             }
         }
         public static void Check_Sound(int index)
@@ -110,6 +113,9 @@ namespace MALFUNCTIONING
                     break;
                 case 9:
                     Sound10();
+                    break;
+                case 10:
+                    Sound11();
                     break;
             }
         }

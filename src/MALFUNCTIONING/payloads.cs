@@ -286,10 +286,16 @@ Do you still want to run it?
         }
         public static void GDI11()
         {
-            while (true)
+            var x = 0;
+            var width = 10;
+            while (payload == 10)
             {
                 var hdc = GetWindowDC(dsk);
-                
+                BitBlt(hdc, x, Randint(0, 10), width, ScrHeight, hdc, x, 0, TernaryRasterOperations.SRCCOPY);
+                ReleaseDC(dsk, hdc);
+                Sleep(10);
+                x += width;
+                if (x >= ScrWidth) x = 0;
             }
         }
     }
