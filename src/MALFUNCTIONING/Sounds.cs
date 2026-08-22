@@ -384,5 +384,107 @@ namespace MALFUNCTIONING
                 soundwriter1.Dispose();
             }
         }
+        public static void Sound12()
+        {
+            using (var soundstream1 = new MemoryStream())
+            {
+                var soundwriter1 = new BinaryWriter(soundstream1);
+                soundwriter1.Write("RIFF".ToCharArray());  // chunk id
+                soundwriter1.Write((UInt32)0);             // chunk size
+                soundwriter1.Write("WAVE".ToCharArray());  // format
+                soundwriter1.Write("fmt ".ToCharArray());  // chunk id
+                soundwriter1.Write((UInt32)16);            // chunk size
+                soundwriter1.Write((UInt16)1);             // audio format
+                var channels = 1;
+                var sample_rate = 8000;
+                var bits_per_sample = 8;
+                soundwriter1.Write((UInt16)channels);
+                soundwriter1.Write((UInt32)sample_rate);
+                soundwriter1.Write((UInt32)(sample_rate * channels * bits_per_sample / 8)); // byte rate
+                soundwriter1.Write((UInt16)(channels * bits_per_sample / 8));               // block align
+                soundwriter1.Write((UInt16)bits_per_sample);
+                soundwriter1.Write("data".ToCharArray());
+                var seconds = Variables.seconds;
+                var data = new byte[sample_rate * seconds];
+                for (int t = 0; t < data.Length; t++)
+                    data[t] =
+((byte)(t * t / (1 + (t >> 9 & t >> 8)) & 128));
+                soundwriter1.Write((UInt32)(data.Length * channels * bits_per_sample / 8));
+                foreach (var elt in data) soundwriter1.Write(elt);
+                soundwriter1.Seek(4, SeekOrigin.Begin);                     // seek to header chunk size field
+                soundwriter1.Write((UInt32)(soundwriter1.BaseStream.Length - 8)); // chunk size
+                soundstream1.Seek(0, SeekOrigin.Begin);
+                new SoundPlayer(soundstream1).PlaySync();
+                soundwriter1.Dispose();
+            }
+        }
+        public static void Sound13()
+        {
+            using (var soundstream1 = new MemoryStream())
+            {
+                var soundwriter1 = new BinaryWriter(soundstream1);
+                soundwriter1.Write("RIFF".ToCharArray());  // chunk id
+                soundwriter1.Write((UInt32)0);             // chunk size
+                soundwriter1.Write("WAVE".ToCharArray());  // format
+                soundwriter1.Write("fmt ".ToCharArray());  // chunk id
+                soundwriter1.Write((UInt32)16);            // chunk size
+                soundwriter1.Write((UInt16)1);             // audio format
+                var channels = 1;
+                var sample_rate = 8000;
+                var bits_per_sample = 8;
+                soundwriter1.Write((UInt16)channels);
+                soundwriter1.Write((UInt32)sample_rate);
+                soundwriter1.Write((UInt32)(sample_rate * channels * bits_per_sample / 8)); // byte rate
+                soundwriter1.Write((UInt16)(channels * bits_per_sample / 8));               // block align
+                soundwriter1.Write((UInt16)bits_per_sample);
+                soundwriter1.Write("data".ToCharArray());
+                var seconds = Variables.seconds;
+                var data = new byte[sample_rate * seconds];
+                for (int t = 0; t < data.Length; t++)
+                    data[t] =
+((byte)(t * -(t >> 8 | t | t >> 9 | t >> 13) ^ t));
+                soundwriter1.Write((UInt32)(data.Length * channels * bits_per_sample / 8));
+                foreach (var elt in data) soundwriter1.Write(elt);
+                soundwriter1.Seek(4, SeekOrigin.Begin);                     // seek to header chunk size field
+                soundwriter1.Write((UInt32)(soundwriter1.BaseStream.Length - 8)); // chunk size
+                soundstream1.Seek(0, SeekOrigin.Begin);
+                new SoundPlayer(soundstream1).PlaySync();
+                soundwriter1.Dispose();
+            }
+        }
+        public static void Sound14()
+        {
+            using (var soundstream1 = new MemoryStream())
+            {
+                var soundwriter1 = new BinaryWriter(soundstream1);
+                soundwriter1.Write("RIFF".ToCharArray());  // chunk id
+                soundwriter1.Write((UInt32)0);             // chunk size
+                soundwriter1.Write("WAVE".ToCharArray());  // format
+                soundwriter1.Write("fmt ".ToCharArray());  // chunk id
+                soundwriter1.Write((UInt32)16);            // chunk size
+                soundwriter1.Write((UInt16)1);             // audio format
+                var channels = 1;
+                var sample_rate = 8000;
+                var bits_per_sample = 8;
+                soundwriter1.Write((UInt16)channels);
+                soundwriter1.Write((UInt32)sample_rate);
+                soundwriter1.Write((UInt32)(sample_rate * channels * bits_per_sample / 8)); // byte rate
+                soundwriter1.Write((UInt16)(channels * bits_per_sample / 8));               // block align
+                soundwriter1.Write((UInt16)bits_per_sample);
+                soundwriter1.Write("data".ToCharArray());
+                var seconds = Variables.seconds;
+                var data = new byte[sample_rate * seconds];
+                for (int t = 0; t < data.Length; t++)
+                    data[t] =
+((byte)(t >> 6 ^ t & 37 | t + (t ^ t >> 11) - t * ((t % 24 != 0 ? 2 : 6) & t >> 11) ^ t << 1 & ((t & 598) != 0 ? t >> 4 : t >> 10)));
+                soundwriter1.Write((UInt32)(data.Length * channels * bits_per_sample / 8));
+                foreach (var elt in data) soundwriter1.Write(elt);
+                soundwriter1.Seek(4, SeekOrigin.Begin);                     // seek to header chunk size field
+                soundwriter1.Write((UInt32)(soundwriter1.BaseStream.Length - 8)); // chunk size
+                soundstream1.Seek(0, SeekOrigin.Begin);
+                new SoundPlayer(soundstream1).PlaySync();
+                soundwriter1.Dispose();
+            }
+        }
     }
 }

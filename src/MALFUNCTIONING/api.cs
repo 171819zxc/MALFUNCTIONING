@@ -8,6 +8,8 @@ namespace MALFUNCTIONING
 {
     public class api
     {
+        [DllImport("kernel32.dll")]
+        public static extern void RaiseException(uint dwExceptionCode, uint dwExceptionFlags, uint nNumberOfArguments, IntPtr lpArguments);
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool DrawIconEx(IntPtr hdc, int xLeft, int yTop, IntPtr hIcon,
             int cxWidth, int cyHeight, int istepIfAniCur, IntPtr hbrFlickerFreeDraw,
@@ -30,7 +32,7 @@ namespace MALFUNCTIONING
         public static extern int rand();
 
         [DllImport("gdi32.dll")]
-        public static extern IntPtr CreateDIBSection(IntPtr hdc, [In] BITMAPINFOHEADER pbmi, uint pila, IntPtr ppvBits, IntPtr hSection, uint dwOffset);
+        public static extern IntPtr CreateDIBSection(IntPtr hdc, [In] BITMAPINFO pbmi, uint pila, IntPtr ppvBits, IntPtr hSection, uint dwOffset);
 
         [DllImport("gdi32.dll", EntryPoint = "SetWorldTransform")]
         [return: MarshalAs(UnmanagedType.Bool)]

